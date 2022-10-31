@@ -5,10 +5,16 @@ import HeaderMain from "../pages/Shared/Headers/HeaderMain";
 
 const Main = () => {
   return (
-    <div className="max-w-6xl mx-auto">
-      <HeaderMain></HeaderMain>
-      <Outlet></Outlet>
-      <Footer></Footer>
+    <div>
+      <div className="max-w-6xl mx-auto">
+        <HeaderMain></HeaderMain>
+        <Outlet></Outlet>
+      </div>
+      <div className="bg-[#151515]">
+        <div className="max-w-6xl mx-auto">
+          <Footer></Footer>
+        </div>
+      </div>
     </div>
   );
 };
