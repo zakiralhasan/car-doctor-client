@@ -6,12 +6,12 @@ import HeaderMain from "../pages/Shared/Headers/HeaderMain";
 const Main = () => {
   return (
     <div>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1140px] mx-auto">
         <HeaderMain></HeaderMain>
         <Outlet></Outlet>
       </div>
       <div className="bg-[#151515]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1140px] mx-auto">
           <Footer></Footer>
         </div>
       </div>
