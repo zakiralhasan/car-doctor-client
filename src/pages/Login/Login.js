@@ -6,6 +6,7 @@ import { AuthContext } from "../../Contexts/AuthProvider";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import HeaderForm from "../Shared/Headers/HeaderForm";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -29,6 +30,7 @@ const Login = () => {
   };
   return (
     <div>
+      <HeaderForm></HeaderForm>
       <div className="w-10/12 mx-auto my-8 ">
         <div className="flex items-center justify-center">
           <div className="basis-2/5 hidden md:block">

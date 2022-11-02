@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import logoRegister from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import HeaderForm from "../Shared/Headers/HeaderForm";
 const Register = () => {
   const [errorMessage, setErrorMessage] = useState();
   const { user, creaeUser } = useContext(AuthContext);
@@ -31,6 +32,7 @@ const Register = () => {
   };
   return (
     <div>
+      <HeaderForm></HeaderForm>
       <div className="w-10/12 mx-auto my-8 ">
         <div className="flex items-center justify-center">
           <div className="basis-2/5 hidden md:block">
