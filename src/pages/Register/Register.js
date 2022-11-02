@@ -1,13 +1,33 @@
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import logoRegister from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Contexts/AuthProvider";
 const Register = () => {
-  const { user } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState();
+  const { user, creaeUser } = useContext(AuthContext);
 
   const handleForm = (event) => {
     event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+
+    //create new user
+    creaeUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+    form.reset();
   };
   return (
     <div>
@@ -27,6 +47,7 @@ const Register = () => {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       placeholder="Your name"
                       className="input input-bordered"
                     />
@@ -37,8 +58,10 @@ const Register = () => {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       placeholder="Your email"
                       className="input input-bordered"
+                      required
                     />
                   </div>
                   <div className="form-control">
@@ -46,11 +69,17 @@ const Register = () => {
                       <span className="label-text">Password</span>
                     </label>
                     <input
-                      type="text"
+                      type="password"
+                      name="password"
                       placeholder="Your password"
                       className="input input-bordered"
+                      required
                     />
                   </div>
+                  {/* error message */}
+                  {errorMessage && (
+                    <p className="text-xs text-red-500 mt-3">{errorMessage}</p>
+                  )}
                   <div className="form-control mt-6">
                     <button className=" py-4 bg-[#FF3811] text-white font-semibold rounded-md">
                       Register
