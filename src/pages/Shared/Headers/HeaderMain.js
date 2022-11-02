@@ -31,7 +31,7 @@ const Header = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded w-32"
             >
               <li>
-                <Link>Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <Link>About</Link>
@@ -56,7 +56,7 @@ const Header = () => {
           <div className="hidden sm:block">
             <ul className="flex gap-4 ml-36">
               <li>
-                <Link>Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <Link>About</Link>

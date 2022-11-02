@@ -5,11 +5,27 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
 
 const Login = () => {
-  const { user } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const { user, loginUser } = useContext(AuthContext);
   const handleForm = (event) => {
     event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    loginUser(email, password)
+      .then((result) => {
+        const loginUser = result.user;
+        console.log(loginUser);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        setErrorMessage(errorMsg);
+      });
+    event.target.reset();
   };
   return (
     <div>
@@ -29,6 +45,7 @@ const Login = () => {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       placeholder="Your email"
                       className="input input-bordered"
                     />
@@ -38,11 +55,16 @@ const Login = () => {
                       <span className="label-text">Password</span>
                     </label>
                     <input
-                      type="text"
+                      type="password"
+                      name="password"
                       placeholder="Your password"
                       className="input input-bordered"
                     />
                   </div>
+                  {/* error message */}
+                  {errorMessage && (
+                    <p className="text-xs text-red-500 mt-3">{errorMessage}</p>
+                  )}
                   <div className="form-control mt-6">
                     <button className=" py-4 bg-[#FF3811] text-white font-semibold rounded-md">
                       Login
@@ -63,10 +85,10 @@ const Login = () => {
                     </div>
                   </div>
                   <label className="label">
-                    <p className=" font-semibold mt-6 ">
+                    <p className="text-xs text-[#737373] font-semibold mt-6 ">
                       Don't have an account?{" "}
                       <Link to="/register" className="text-[#FF3811]">
-                        register
+                        Register
                       </Link>
                     </p>
                   </label>

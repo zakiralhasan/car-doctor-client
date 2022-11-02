@@ -86,7 +86,7 @@ const Register = () => {
                     </button>
                   </div>
                   <label className="label">
-                    <p className="label-text-alt ">
+                    <p className="text-xs text-[#737373] font-semibold mt-6 ">
                       Already have an account?{" "}
                       <Link to="/login" className="text-[#FF3811]">
                         Login
