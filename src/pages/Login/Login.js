@@ -1,7 +1,7 @@
 import React from "react";
 import logoLogin from "../../assets/images/login/login.svg";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -11,6 +11,10 @@ import HeaderForm from "../Shared/Headers/HeaderForm";
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const { user, loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleForm = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -21,6 +25,7 @@ const Login = () => {
         const loginUser = result.user;
         console.log(loginUser);
         setErrorMessage("");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMsg = error.message;

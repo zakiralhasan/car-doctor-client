@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import Orders from "../pages/Orders/Orders";
 import Register from "../pages/Register/Register";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -14,11 +15,22 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       {
         path: "/services/:id",
-        element: <CheckOut></CheckOut>,
+        element: (
+          <PrivetRoute>
+            <CheckOut></CheckOut>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/services/${params.id}`),
       },
-      { path: "/orders", element: <Orders></Orders> },
+      {
+        path: "/orders",
+        element: (
+          <PrivetRoute>
+            <Orders></Orders>
+          </PrivetRoute>
+        ),
+      },
       { path: "register", element: <Register></Register> },
       { path: "login", element: <Login></Login> },
     ],

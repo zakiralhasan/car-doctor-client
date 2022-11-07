@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const OrdersRow = ({ order, handleDelete }) => {
+const OrdersRow = ({ order, handleDelete, handleUpdate }) => {
   const [orderService, setOrderService] = useState();
   const {
     _id,
@@ -52,7 +52,12 @@ const OrdersRow = ({ order, handleDelete }) => {
         <span className="badge badge-ghost badge-sm">${price}</span>
       </td>
       <th>
-        <button className="btn btn-ghost btn-xs">{status}</button>
+        <button
+          onClick={() => handleUpdate(_id)}
+          className="btn btn-ghost btn-xs"
+        >
+          {status}
+        </button>
       </th>
     </tr>
   );
