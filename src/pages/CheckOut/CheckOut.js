@@ -18,13 +18,14 @@ const CheckOut = () => {
     // console.log(name, phone, message);
 
     const order = {
-      service: _id,
+      serviceID: _id,
       serviceName: title,
       price,
       customer: name,
       email,
       phone,
       message,
+      status: "Pending",
     };
 
     fetch("http://localhost:5000/orders", {
