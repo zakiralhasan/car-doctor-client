@@ -39,7 +39,7 @@ const HeaderForm = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded w-40"
               >
                 <li>
-                  <Link to="/">Order</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
                   <Link>Order Review</Link>
@@ -58,7 +58,7 @@ const HeaderForm = () => {
             <div className="hidden sm:block w-full mr-12">
               <ul className="flex gap-6 justify-end">
                 <li>
-                  <Link to="/">Order</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
                   <Link>Order Review</Link>

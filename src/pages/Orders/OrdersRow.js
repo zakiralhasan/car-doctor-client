@@ -19,7 +19,7 @@ const OrdersRow = ({ order, handleDelete, handleUpdate }) => {
     fetch(`http://localhost:5000/services/${serviceID}`)
       .then((res) => res.json())
       .then((data) => setOrderService(data));
-  }, []);
+  }, [serviceID]);
 
   return (
     <tr>

@@ -23,8 +23,22 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         const loginUser = result.user;
+        const currentUser = { email: loginUser.email }; //used for JWT
         console.log(loginUser);
         setErrorMessage("");
+
+        //jwt token start
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("token", data.token);
+          });
+        //jwt token end
         navigate(from, { replace: true });
       })
       .catch((error) => {

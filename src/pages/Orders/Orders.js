@@ -3,18 +3,30 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import HeaderForm from "../Shared/Headers/HeaderForm";
 import OrdersRow from "./OrdersRow";
 
 const Orders = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setOrders(data));
+    fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+      headers: { authorization: `Bearer ${localStorage.getItem("token")}` }, //used for JWT
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 403 || res.status === 401) {
+          return logoutUser();
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setOrders(data);
+      });
   }, [user?.email]);
-
+  console.log(orders);
   const handleDelete = (id) => {
     console.log(id);
     const proceed = window.confirm("Are you sure,  to cancel this order?");
@@ -56,7 +68,10 @@ const Orders = () => {
   };
   return (
     <div>
-      <h1>you have {orders.length} orders</h1>
+      <div className="mb-6">
+        <HeaderForm></HeaderForm>
+      </div>
+      <h1>you have {orders?.length} orders</h1>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
